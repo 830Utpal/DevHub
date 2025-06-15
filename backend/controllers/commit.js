@@ -12,7 +12,7 @@ export async function commitRepo(argv) {
   try {
     const stagedFiles = await fs.readdir(stagingPath);
     if (stagedFiles.length === 0) {
-      console.log(" No files to commit.");
+      console.log("No files to commit.");
       return;
     }
 
@@ -20,7 +20,6 @@ export async function commitRepo(argv) {
     const commitDir = path.join(commitsPath, commitId);
     await fs.mkdir(commitDir, { recursive: true });
 
-   
     for (const file of stagedFiles) {
       await fs.copyFile(
         path.join(stagingPath, file),
@@ -28,14 +27,13 @@ export async function commitRepo(argv) {
       );
     }
 
-
     await fs.writeFile(
       path.join(commitDir, 'commit.json'),
       JSON.stringify({ message, date: new Date().toISOString() }, null, 2)
     );
 
-    console.log(` Commit ${commitId} created with message: "${message}"`);
+    console.log(`Commit ${commitId} created with message: "${message}"`);
   } catch (err) {
-    console.error(" Commit failed:", err.message);
+    console.error("Commit failed:", err.message);
   }
 }

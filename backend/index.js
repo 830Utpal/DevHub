@@ -30,14 +30,14 @@ yargs(hideBin(process.argv))
     'Commit changes to the repository',
     (yargs) =>
       yargs.option('message', {
-        alias: 'm',
+        
         describe: 'Commit message',
         type: 'string',
         demandOption: true,
       }),
     (argv) => {
-      commitRepo(argv.message);
-    }
+        commitRepo(argv);
+            }
   )
 
   .command('push', 'Push committed changes', {}, pushRepo)
